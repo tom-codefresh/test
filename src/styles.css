@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "simplepro";
+}
+
+html {
+  overflow: hidden;
+}
+
+.mat-expansion-panel-body {
+  overflow-x: auto;
+  padding: 30px !important;
+  background: black;
+  color: wheat;
+  max-height: 200px;
+}
+
+.mat-expansion-panel-body::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+.mat-expansion-panel-body::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: #d9d9d9;
+}
+
+.mat-expansion-panel-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+}

@@ -1,0 +1,47 @@
+<div class="container" fxLayoutAlign="space-between center" fxLayout="column">
+
+  <mat-card fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="8px">
+    <mat-card-header fxFlex="20" fxLayout="column" fxLayoutAlign="center">
+      <mat-card-title class="title">Build Information</mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxFlex="40" fxLayoutAlign="space-around center" fxLayout="column">
+      <div fxFlex fxLayout="column" class="text-align" fxLayoutAlign="center">last update:<br> {{lastUpdateTime}}
+      </div>
+      <div fxFlex fxLayout="column" class="text-align" fxLayoutAlign="center">status:<br> {{processEnded ? 'success': 'In procsss'}}</div>
+    </mat-card-content>
+    <mat-card-actions fxFlex="20" fxLayoutAlign="center center">
+      <div *ngIf="!isBuildRun && !processEnded" fxLayout="row" fxLayoutAlign="center center" (click)="runBuild()" fxLayoutGap="5px">
+        <button mat-button class="pointer">Create Build</button>
+        <mat-icon class="pointer">get_app</mat-icon>
+      </div>
+      <div *ngIf="isBuildRun && !processEnded" fxLayout="row" fxLayoutAlign="center center" (click)="runBuild()" fxLayoutGap="5px">
+        <button mat-button style="cursor: pointer">Stop Build</button>
+        <mat-spinner [strokeWidth]="5" [diameter]="30"></mat-spinner>
+      </div>
+      <div *ngIf="processEnded" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5px">
+        <button mat-button>Done!</button>
+        <mat-icon>done</mat-icon>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+  <ng-container *ngIf="isBuildRun">
+    <mat-accordion fxFlex="70" *ngIf="isBuildRun">
+      <mat-expansion-panel *ngFor="let step of data.steps; let i = index" (click)="updateScroll(i)" [class.hidden]="!step.givenLogs"
+        [hideToggle]="true" [expanded]="currentStep == i && !processEnded">
+        <mat-expansion-panel-header fxLayoutAlign="space-between center">
+          <mat-panel-title>
+            {{step.name}}
+          </mat-panel-title>
+          <mat-panel-description fxFlex="5" *ngIf="getAllDataByStep.includes(i) || processEnded">
+              <mat-icon>done</mat-icon>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p *ngFor="let log of step.givenLogs">
+          <span style="font-weight:bold;">- &nbsp;</span>{{log}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+
+</div>

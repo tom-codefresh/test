@@ -1,0 +1,11 @@
+<div *ngIf="!isServerDown;else loader" class="root-container">
+  <div fxLayout="row" fxLayoutAlign="center" class="height-100">
+    <app-create-build [data]="data"></app-create-build>
+  </div>
+</div>
+<ng-template #loader>
+  <div fxFlex="100" fxLayoutAlign="center center" fxLayout="column">
+    <h2>...מאתחל שרת</h2>
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
